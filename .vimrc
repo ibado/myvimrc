@@ -13,8 +13,9 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set laststatus=2
+set hidden
 
-set colorcolumn=80
+set colorcolumn=90
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -32,6 +33,7 @@ Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer --java-c
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdtree'
 Plug 'ap/vim-buftabline'
+Plug 'mattn/emmet-vim'
 
 call plug#end()
 
@@ -47,6 +49,10 @@ let NERDTreeQuitOnOpen=1
 nmap <Tab> :bn<CR>
 nmap <leader><Tab> :bp<CR>
 nmap <leader>w :bd<CR>
+" Run source code
+autocmd FileType rust nnoremap <C-x> :!cargo run
+autocmd FileType c nnoremap <C-x> :!make
+autocmd FileType python nnoremap<C-x> :!python3 %
 " YouCompleMe keymap
 nnoremap <buffer> <silent> <leader>gd :YcmCompleter GoTo<CR>
 nnoremap <buffer> <silent> <leader>gr :YcmCompleter GoToReferences<CR>
