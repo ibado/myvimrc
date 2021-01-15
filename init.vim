@@ -18,16 +18,19 @@ set nowrap
 
 call plug#begin('~/.vim/plugged')
 
+" Telescope dependencies
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
 Plug 'mbbill/undotree'
-Plug 'ycm-core/YouCompleteMe'
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdtree'
 Plug 'ap/vim-buftabline'
 Plug 'udalov/kotlin-vim'
 Plug 'rust-lang/rust.vim'
-"Plug 'mattn/emmet-vim'
 
 call plug#end()
 
@@ -43,15 +46,36 @@ let NERDTreeQuitOnOpen=1
 nmap <Tab> :bn<CR>
 nmap <leader><Tab> :bp<CR>
 nmap <leader>w :bd<CR>
+
 " Run source code
 autocmd FileType rust nnoremap <C-x> :!cargo run
 autocmd FileType c nnoremap <C-x> :!make
 autocmd FileType python nnoremap<C-x> :!python3 %
 autocmd FileType javascript nnoremap<C-x> :!node %
-" YouCompleMe keymap
-nnoremap <buffer> <silent> <leader>gd :YcmCompleter GoTo<CR>
-nnoremap <buffer> <silent> <leader>gr :YcmCompleter GoToReferences<CR>
-noremap <buffer> <silent> <leader>rr :YcmCompleter RefactorRename<space>
+
+" Coc keymaping ============================================================
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gr <Plug>(coc-references)
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" Coc keymaping end ========================================================
+
 " NerdTree keymap
 nmap <leader>t :NERDTreeToggle<CR>
 nmap <leader>ft :NERDTreeFind<CR>
+
+" Telescope
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
