@@ -29,9 +29,12 @@ Plug 'mbbill/undotree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdtree'
 Plug 'ap/vim-buftabline'
+Plug 'vim-airline/vim-airline' " fancy status bottom bar
+
+" Languages support
 Plug 'udalov/kotlin-vim'
 Plug 'rust-lang/rust.vim'
-Plug 'vim-airline/vim-airline'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} " Python highlighter
 
 call plug#end()
 
@@ -81,3 +84,6 @@ nmap <leader>ft :NERDTreeFind<CR>
 " Telescope
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+
+" python rename keymap
+nmap <silent> <leader>rr :Semshi rename<CR>
