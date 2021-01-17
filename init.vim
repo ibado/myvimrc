@@ -31,9 +31,11 @@ Plug 'preservim/nerdtree'
 Plug 'ap/vim-buftabline'
 Plug 'udalov/kotlin-vim'
 Plug 'rust-lang/rust.vim'
+Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
+let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 set background=dark
 
@@ -48,10 +50,10 @@ nmap <leader><Tab> :bp<CR>
 nmap <leader>w :bd<CR>
 
 " Run source code
-autocmd FileType rust nnoremap <C-x> :!cargo run
-autocmd FileType c nnoremap <C-x> :!make
-autocmd FileType python nnoremap<C-x> :!python3 %
-autocmd FileType javascript nnoremap<C-x> :!node %
+autocmd FileType rust nnoremap <C-x> :w<cr> :!cargo run<cr>
+autocmd FileType c nnoremap <C-x> :w<cr> :!make<cr>
+autocmd FileType python nnoremap<C-x> :w<cr> :!python3 %<cr>
+autocmd FileType javascript nnoremap<C-x> :w<cr> :!node %<cr>
 
 " Coc keymaping ============================================================
 nmap <leader>gd <Plug>(coc-definition)
