@@ -30,11 +30,12 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdtree'
 Plug 'ap/vim-buftabline'
 Plug 'vim-airline/vim-airline' " fancy status bottom bar
+Plug 'posva/vim-vue'
 
 " Languages support
 Plug 'udalov/kotlin-vim'
 Plug 'rust-lang/rust.vim'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} " Python highlighter
+" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} " Python highlighter
 
 call plug#end()
 
@@ -47,6 +48,8 @@ let NERDTreeQuitOnOpen=1
 
 "================================ KEY MAPING ===============================
 "
+" copy in sys clipboard
+noremap <leader>y "*y
 " buffers
 nmap <Tab> :bn<CR>
 nmap <leader><Tab> :bp<CR>
@@ -61,6 +64,7 @@ autocmd FileType javascript nnoremap<C-x> :w<cr> :!node %<cr>
 " Coc keymaping ============================================================
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-references)
+nmap <leader>rr <Plug>(coc-rename)
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -86,4 +90,4 @@ nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 
 " python rename keymap
-nmap <silent> <leader>rr :Semshi rename<CR>
+"nmap <silent> <leader>rr :Semshi rename<CR>
