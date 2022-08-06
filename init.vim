@@ -24,23 +24,28 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'morhetz/gruvbox'
 Plug 'mbbill/undotree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdtree'
 Plug 'ap/vim-buftabline'
 Plug 'vim-airline/vim-airline' " fancy status bottom bar
 Plug 'posva/vim-vue'
-
+" colorschemes
+Plug 'morhetz/gruvbox'
+Plug 'sainnhe/sonokai'
+Plug 'NLKNguyen/papercolor-theme'
 " Languages support
 Plug 'udalov/kotlin-vim'
 Plug 'rust-lang/rust.vim'
+Plug 'elixir-editors/vim-elixir'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'neovimhaskell/nvim-hs'
 " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} " Python highlighter
 
 call plug#end()
 
-let g:gruvbox_contrast_dark = 'hard'
-colorscheme gruvbox
+"let g:gruvbox_contrast_dark = 'hard'
+colorscheme PaperColor
 set background=dark
 
 let mapleader = " "
@@ -49,7 +54,7 @@ let NERDTreeQuitOnOpen=1
 "================================ KEY MAPING ===============================
 "
 " copy in sys clipboard
-noremap <leader>y "*y
+noremap <leader>y "+y
 " buffers
 nmap <Tab> :bn<CR>
 nmap <leader><Tab> :bp<CR>
@@ -60,6 +65,7 @@ autocmd FileType rust nnoremap <C-x> :w<cr> :!cargo run<cr>
 autocmd FileType c nnoremap <C-x> :w<cr> :!make<cr>
 autocmd FileType python nnoremap<C-x> :w<cr> :!python3 %<cr>
 autocmd FileType javascript nnoremap<C-x> :w<cr> :!node %<cr>
+autocmd FileType go nnoremap<C-x> :w<cr> :!go run %<cr>
 
 " Coc keymaping ============================================================
 nmap <leader>gd <Plug>(coc-definition)
@@ -74,6 +80,7 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+tnoremap <Esc> <C-\><C-n>
 
 function! s:check_back_space() abort
   let col = col('.') - 1
